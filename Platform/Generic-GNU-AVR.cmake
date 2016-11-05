@@ -8,3 +8,7 @@ endif ()
 if (AVR_F_CPU)
     add_definitions(-DF_CPU=${AVR_F_CPU})
 endif ()
+
+# Flags for the MinSizeDebug build type
+set(AVR_GNU_GENERIC_FLAGS_MINSIZEDEBUG "-g -Os")
+
