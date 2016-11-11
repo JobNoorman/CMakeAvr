@@ -1,3 +1,7 @@
+set(AVR_UPLOAD_PORT       ""      CACHE STRING "Port for uploading")
+set(AVR_UPLOAD_BAUD       115200  CACHE STRING "Baudrate for the upload port")
+set(AVR_UPLOAD_PROGRAMMER arduino CACHE STRING "Programmer for uploading")
+
 function(add_upload_target target)
     find_program(AVRDUDE_EXE NAMES avrdude)
 
@@ -12,9 +16,6 @@ function(add_upload_target target)
                         "for ${target}")
         return()
     endif ()
-
-    set(AVR_UPLOAD_BAUD 115200 CACHE STRING "Baudrate for the upload port")
-    set(AVR_UPLOAD_PROGRAMMER arduino CACHE STRING "Programmer for uploading")
 
     add_custom_target(${target}-upload
         COMMAND ${AVRDUDE_EXE}
