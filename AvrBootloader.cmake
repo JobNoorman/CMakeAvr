@@ -23,4 +23,10 @@ function(add_avr_bootloader target)
     add_executable(${target} ${ARGN})
     set_target_properties(${target} PROPERTIES
                           LINK_FLAGS "-Wl,--section-start=.text=${STDOUT}")
+
+    set(TOOL ${AVR_TOOLCHAIN_PATH}/Tools/check_bootloader_size.py)
+    add_custom_command(TARGET ${target} POST_BUILD
+                       COMMAND ${PYTHON_EXECUTABLE} ${TOOL}
+                               --elf-file $<TARGET_FILE:${target}>
+                               --size ${AVR_BOOT_SIZE})
 endfunction()
